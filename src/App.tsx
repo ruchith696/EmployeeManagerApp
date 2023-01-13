@@ -1,16 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import "./App.css";
 import AppHeader from "./components/AppHeader";
 import BodyCard from "./components/BodyCard";
+import EmployeeForm from "./components/EmployeeForm";
 import { Employee } from "./services/employee";
 import { EmployeeService } from "./services/employee.service";
 
 function App() {
   const employeeService = new EmployeeService();
   const [employees, setEmployees] = useState<Employee[]>([]);
-  employeeService.getEmployeees().then((value) => {
-    setEmployees(value);
+  useEffect(() => {
+    employeeService.getEmployeees().then((value) => {
+      setEmployees(value);
+    });
   });
 
   const [editEmployee, setEditEmployee] = useState<boolean>(false);
@@ -44,8 +47,14 @@ function App() {
 
   return (
     <>
-      <AppHeader />
-      <BodyCard employees={employees} />
+      <AppHeader handleModal={handleModal} />
+      <BodyCard handleModal={handleModal} employees={employees} />
+      <EmployeeForm
+        editEmployee={editEmployee}
+        deleteEmployee={deleteEmployee}
+        addEmployee={addEmployee}
+        handleClose={handleClose}
+      />
     </>
   );
 }

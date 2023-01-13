@@ -3,7 +3,9 @@ import { Container, FormControl } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-interface IAppHeaderProps {}
+interface IAppHeaderProps {
+  handleModal: (modal: string) => void;
+}
 
 const AppHeader: React.FunctionComponent<IAppHeaderProps> = (props) => {
   return (
@@ -11,7 +13,9 @@ const AppHeader: React.FunctionComponent<IAppHeaderProps> = (props) => {
       <Container>
         <Navbar.Brand href="#home">Employee Manager</Navbar.Brand>
         <Nav className="me-auto">
-          <Nav.Link href="#home">Add Employee</Nav.Link>
+          <Nav.Link onClick={() => props.handleModal("add")}>
+            Add Employee
+          </Nav.Link>
         </Nav>
       </Container>
       <Form className="d-flex">
