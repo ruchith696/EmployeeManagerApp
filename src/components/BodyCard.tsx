@@ -6,7 +6,8 @@ import EmployeeCard from "./EmployeeCard";
 
 interface IBodyCardProps {
   employees: Employee[];
-  handleModal: (modal: string) => void;
+  handleModal: (modal: string, employee: null | Employee) => void;
+  
 }
 
 const BodyCard: React.FunctionComponent<IBodyCardProps> = (props) => {

@@ -5,7 +5,7 @@ import { Employee } from "../services/employee";
 
 interface IEmployeeCardProps {
   employee: Employee;
-  handleModal: (modal: string) => void;
+  handleModal: (modal: string, employee: null | Employee) => void;
 }
 
 const EmployeeCard: React.FunctionComponent<IEmployeeCardProps> = (props) => {
@@ -42,12 +42,15 @@ const EmployeeCard: React.FunctionComponent<IEmployeeCardProps> = (props) => {
       </Card.Body>
       <Card.Body>
         <ButtonGroup className="float-end" size="sm">
-          <Button variant="primary" onClick={() => props.handleModal("edit")}>
+          <Button
+            variant="primary"
+            onClick={() => props.handleModal("edit", props.employee)}
+          >
             <i className="fa fa-pencil"></i>{" "}
           </Button>
           <Button
             variant="secondary"
-            onClick={() => props.handleModal("delete")}
+            onClick={() => props.handleModal("delete", props.employee)}
           >
             <i className="fa fa-times"></i>
           </Button>
