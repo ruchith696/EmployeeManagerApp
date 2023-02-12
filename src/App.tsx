@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 
 import "./App.css";
 import AppHeader from "./components/AppHeader";
@@ -6,6 +6,8 @@ import BodyCard from "./components/BodyCard";
 import EmployeeForm from "./components/EmployeeForm";
 import { Employee } from "./services/employee";
 import { EmployeeService } from "./services/employee.service";
+
+export const UserContext = createContext((modal: any, employee: any) => {});
 
 function App() {
   const [employees, setEmployees] = useState<Employee[]>([]);
@@ -43,6 +45,7 @@ function App() {
         }
     }
   };
+
   const handleClose = (modal: string) => {
     switch (modal) {
       case "edit":
@@ -111,7 +114,10 @@ function App() {
   return (
     <>
       <AppHeader handleModal={handleModal} searchEmployee={searchEmployee} />
-      <BodyCard handleModal={handleModal} employees={employees} />
+      <UserContext.Provider value={handleModal}>
+        <BodyCard employees={employees} />
+      </UserContext.Provider>
+
       <EmployeeForm
         onAddEmployee={onAddEmployee}
         onDeleteEmployee={onDeleteEmployee}

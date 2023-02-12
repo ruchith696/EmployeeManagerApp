@@ -2,13 +2,14 @@ import * as React from "react";
 
 import { Button, ButtonGroup, Card, Image, ListGroup } from "react-bootstrap";
 import { Employee } from "../services/employee";
+import { UserContext } from "/Users/ruchithreddy/Desktop/react practise/employee-manager-app/src/App";
 
 interface IEmployeeCardProps {
   employee: Employee;
-  handleModal: (modal: string, employee: null | Employee) => void;
 }
 
 const EmployeeCard: React.FunctionComponent<IEmployeeCardProps> = (props) => {
+  const handleModal = React.useContext(UserContext);
   return (
     <Card className="card">
       <Card.Body className="row">
@@ -44,17 +45,18 @@ const EmployeeCard: React.FunctionComponent<IEmployeeCardProps> = (props) => {
         <ButtonGroup className="float-end" size="sm">
           <Button
             variant="primary"
-            onClick={() => props.handleModal("edit", props.employee)}
+            onClick={() => handleModal("edit", props.employee)}
           >
             <i className="fa fa-pencil"></i>{" "}
           </Button>
           <Button
             variant="secondary"
-            onClick={() => props.handleModal("delete", props.employee)}
+            onClick={() => handleModal("delete", props.employee)}
           >
             <i className="fa fa-times"></i>
           </Button>
         </ButtonGroup>
+
         <div className="social-links">
           <ListGroup horizontal>
             <ListGroup.Item>

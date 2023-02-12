@@ -6,8 +6,6 @@ import EmployeeCard from "./EmployeeCard";
 
 interface IBodyCardProps {
   employees: Employee[];
-  handleModal: (modal: string, employee: null | Employee) => void;
-  
 }
 
 const BodyCard: React.FunctionComponent<IBodyCardProps> = (props) => {
@@ -16,7 +14,7 @@ const BodyCard: React.FunctionComponent<IBodyCardProps> = (props) => {
       <Row>
         {props.employees.map((employee) => (
           <div className="col-md-6 col-xl-3" key={employee.id}>
-            <EmployeeCard employee={employee} handleModal={props.handleModal} />
+            <EmployeeCard employee={employee} />
           </div>
         ))}
       </Row>
